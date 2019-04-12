@@ -16,24 +16,11 @@ class Hero {
             console.log(this.y);
             if (e.keyCode === 32 && this.y > 340) {
 
-                this.velocity_Y = -8;
+                this.velocity_Y = -10;
 
             }
         });
     }
-
-    // hitBottom() {
-    //     return this.y > 330;
-    // }
-
-    // handleJump(e) {
-
-    //     if (e.keyCode === 32 ) {
-
-    //         this.velocity_Y = -8;
-
-    //     }
-    // } 
 
     update() { 
         console.log(this.y); 
@@ -56,6 +43,20 @@ class Hero {
         let renderY = this.y - this.height / 2;
         this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY);
     }
+
+
+    // hitBottom() {
+    //     return this.y > 330;
+    // }
+
+    // handleJump(e) {
+
+    //     if (e.keyCode === 32 ) {
+
+    //         this.velocity_Y = -8;
+
+    //     }
+    // } 
 }
 
 export default Hero;
