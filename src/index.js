@@ -1,5 +1,5 @@
 import Environment from './environment';
-import Hero from './villain';
+import Hero from './hero';
 
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('canvas');
@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         environment.update();
         environment.render();
+        hero.update();
         hero.render();
         window.requestAnimationFrame(gameLoop);
     };

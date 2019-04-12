@@ -5,7 +5,7 @@ class Environment {
         this.ctx = ctx;
         this.bgPos = 0;
         this.fgPos = 0;
-        this.bgSpeed = 5;
+        this.bgSpeed = 2;
         this.bgWidth = 1000;
         this.bgImg = document.getElementById('bgImg');
     }
