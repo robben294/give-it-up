@@ -13,17 +13,43 @@ class Hero {
                 document.getElementById("hero2")];
 
         document.addEventListener('keydown', (e) => {
-            console.log(this.y);
-            if (e.keyCode === 32 && this.y > 340) {
-
-                this.velocity_Y = -10;
-
+            
+            if (e.keyCode === 32 && this.y > 335) {
+                if (this.y >= 349) {
+                    this.velocity_Y = -8.7;
+                } else if (this.y >= 347) {
+                    this.velocity_Y = -8.6;
+                // } else if (this.y >= 344) {
+                //     this.velocity_Y = -8.5;
+                // } else if (this.y >= 341){
+                //     this.velocity_Y = -8.4;
+                // } else if (this.y >= 339) {
+                //     this.velocity_Y = -8.3;
+                // } else if (this.y >= 337) {
+                //     this.velocity_Y = -8.2;
+                } else {
+                    this.velocity_Y = -8.1;
+                }
             }
+            // console.log(this.y);
+            // console.log(this.velocity_Y);
         });
     }
 
+    hitBottom(platform) {
+        return this.x >= platform.x 
+            && (this.x <= platform.x + platform.width)
+            && ((this.y + this.height / 2) >= (platform.y + 10));
+    }
+
+    detectCollision(platform) {
+        
+        return (this.x + this.width/2 >= platform.x + 15) //making sure that when hero is flying over the platform never collide 
+            && (this.x - this.width/2 < platform.x)
+            && (this.y + this.height/2 > platform.y + 12);
+    }
+
     update() { 
-        console.log(this.y); 
         this.ticks++;
         if (this.ticks % 10.5 === 0) {
             this.spriteIndex = (this.spriteIndex + 1) % this.sprites.length;
@@ -33,9 +59,9 @@ class Hero {
         this.y += this.velocity_Y;
         this.velocity_Y += 0.6; // down gravity
 
-        if (this.y >= 350) { //bounce
-            this.velocity_Y = -6;
-        }
+        // if (this.y >= 350) { //bounce
+        //     this.velocity_Y = -6;
+        // }
     }
 
     render() {
@@ -44,19 +70,7 @@ class Hero {
         this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY);
     }
 
-
-    // hitBottom() {
-    //     return this.y > 330;
-    // }
-
-    // handleJump(e) {
-
-    //     if (e.keyCode === 32 ) {
-
-    //         this.velocity_Y = -8;
-
-    //     }
-    // } 
+    
 }
 
 export default Hero;
