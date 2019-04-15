@@ -34,7 +34,7 @@ body {
     color: #ddd;
     position: absolute;
     top: 0px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .hidden {

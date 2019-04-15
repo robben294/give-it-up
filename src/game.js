@@ -52,8 +52,8 @@ class Game {
         // this.ctx.fillRect(0 ,0 , 900, 500);
         this.ctx.fillStyle = 'white';
         this.ctx.font = "30px Dokdo";
-        this.ctx.fillText("You'd better play something else", 200, 100);
-        this.ctx.fillText("Press any key to restart", 200, 150);
+        this.ctx.fillText("You'd better play something else!", 200, 100);
+        this.ctx.fillText("Press any key to restart!", 200, 150);
         this.ctx.fillStyle = 'red';
         this.ctx.font = '70px Dokdo';
         this.ctx.fillText(Math.floor((this.count / this.platforms.length) * 100) + '%', 20, 50);
