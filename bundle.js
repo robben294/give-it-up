@@ -167,6 +167,7 @@ function () {
     this.hero = hero;
     this.platforms = platforms;
     this.count = 0;
+    this.gameStarted = false;
     this.audio = document.getElementById('bkg');
   }
 
@@ -182,8 +183,8 @@ function () {
       this.hero.render();
     }
   }, {
-    key: "start",
-    value: function start() {
+    key: "gameLoop",
+    value: function gameLoop() {
       var _this = this;
 
       // this.audio.play();
@@ -194,8 +195,8 @@ function () {
           _this.count += 1;
           platform.setBounce(_this.hero);
         } else if (_this.hero.detectCollision(platform)) {
-          window.alert("you died"); // console.log("you died");
-
+          // window.alert("you died");    
+          // console.log("you died");
           _this.end();
 
           document.location.reload();
@@ -207,7 +208,7 @@ function () {
       this.ctx.fillText(Math.floor(this.count / this.platforms.length * 100) + '%', 20, 50);
       this.hero.update();
       this.hero.render();
-      window.requestAnimationFrame(this.start.bind(this));
+      window.requestAnimationFrame(this.gameLoop.bind(this));
     }
   }, {
     key: "end",
@@ -237,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var level1 = function level1(ctx) {
   var platforms = [];
-  var startXPos = 350;
+  var startXPos = 250;
   var startYPos = 350 + 20 + 12;
   var gap = 60;
   var width1 = 50;
@@ -248,11 +249,11 @@ var level1 = function level1(ctx) {
   var width2 = 50;
   var height2 = 76;
 
-  for (var i = 0; i < 100; ++i) {
+  for (var i = 0; i < 1000; ++i) {
     var platform1 = new _platform__WEBPACK_IMPORTED_MODULE_0__["default"](startXPos + gap * i, startYPos - height1, width1, height1, speed, name1, ctx);
     platforms.push(platform1);
 
-    if (i > 3) {
+    if (i > 3 && i % 4 == 0) {
       var platform2 = new _platform__WEBPACK_IMPORTED_MODULE_0__["default"](startXPos + gap * (i + 1), startYPos - height2, width2, height2, speed, name2, ctx);
       platforms.push(platform2);
       ++i;
@@ -396,15 +397,25 @@ document.addEventListener("DOMContentLoaded", function () {
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
   var environment = new _environment__WEBPACK_IMPORTED_MODULE_0__["default"](canvas, ctx);
-  var hero = new _hero__WEBPACK_IMPORTED_MODULE_1__["default"](375, 350, ctx);
+  var hero = new _hero__WEBPACK_IMPORTED_MODULE_1__["default"](275, 350, ctx);
   var platformL1 = Object(_generatePlatforms__WEBPACK_IMPORTED_MODULE_3__["level1"])(ctx);
   var game = new _game__WEBPACK_IMPORTED_MODULE_2__["default"](ctx, environment, hero, platformL1);
   game.render();
-  ctx.font = "30px Arial";
-  ctx.fillText("Click to Start ", 200, 200); // document.addEventListener('click', () => {
-  // gameLoop();
 
-  game.start(); // });
+  var startGame = function startGame() {
+    var startMenus = document.getElementById('start-menus');
+    startMenus.classList.add('hidden');
+    game.gameStarted = true;
+    document.removeEventListener('keydown', startGame);
+    game.audio.play();
+
+    if (game.gameStarted) {
+      game.gameLoop();
+    }
+  };
+
+  document.addEventListener('keydown', startGame);
+  ctx.font = "50px Indie Flower"; // ctx.fillText("Click to Start ", 200, 200);
 });
 
 /***/ }),

@@ -7,6 +7,7 @@ class Game {
         this.hero = hero;
         this.platforms = platforms;
         this.count = 0;
+        this.gameStarted = false;
         this.audio = document.getElementById('bkg');
     }
 
@@ -20,7 +21,7 @@ class Game {
         this.hero.render();
     }
     
-    start() {
+    gameLoop() {
         // this.audio.play();
         this.environment.update();
         this.environment.render();
@@ -29,7 +30,7 @@ class Game {
                 this.count += 1;
                 platform.setBounce(this.hero);
             } else if (this.hero.detectCollision(platform)) {
-                window.alert("you died");    
+                // window.alert("you died");    
                 // console.log("you died");
                 this.end();
                 document.location.reload();
@@ -40,7 +41,7 @@ class Game {
         this.ctx.fillText(Math.floor((this.count / this.platforms.length) * 100) + '%', 20, 50);
         this.hero.update();
         this.hero.render();
-        window.requestAnimationFrame(this.start.bind(this));
+        window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 
     end() {

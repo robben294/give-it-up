@@ -1,0 +1,41 @@
+img {
+    display: none;
+}
+body {
+    /* background-image: url("../images/page_bkg.jpg"); */
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Indie Flower', cursive;
+}
+#canvas {
+
+}
+
+.canvas-container {
+    display: flex;
+}
+
+#start-menus {
+    position: absolute;
+    height: 500px;
+    width: 900px;
+    left: 25%; 
+    top: 25%;
+    font-size: 50px;
+    color: #ddd;
+    background: rgb(0,0,0,0.3);
+}
+.title {
+    font-size: 120px;
+    font-family: 'Indie Flower', cursive;
+    font-weight: 1000;
+    position: absolute;
+    top: 0px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
