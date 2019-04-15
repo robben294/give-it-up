@@ -141,6 +141,131 @@ function () {
 
 /***/ }),
 
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Game =
+/*#__PURE__*/
+function () {
+  function Game(ctx, environment, hero, platforms) {
+    _classCallCheck(this, Game);
+
+    this.ctx = ctx;
+    this.environment = environment;
+    this.hero = hero;
+    this.platforms = platforms;
+    this.count = 0;
+  }
+
+  _createClass(Game, [{
+    key: "render",
+    value: function render() {
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+      this.environment.render();
+      this.platforms.forEach(function (platform) {
+        platform.render();
+      });
+      this.hero.render();
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      var _this = this;
+
+      var score;
+      this.environment.update();
+      this.environment.render();
+      this.platforms.forEach(function (platform) {
+        if (_this.hero.hitBottom(platform)) {
+          _this.count += 1;
+          platform.setBounce(_this.hero);
+        } else if (_this.hero.detectCollision(platform)) {
+          // window.alert("you died");
+          // console.log("you died");
+          _this.end(); // document.location.reload();
+
+        }
+
+        platform.update();
+        platform.render();
+      });
+      this.ctx.fillText(Math.floor(this.count / this.platforms.length * 100) + '%', 20, 50);
+      this.hero.update();
+      this.hero.render();
+      window.requestAnimationFrame(this.start.bind(this));
+    }
+  }, {
+    key: "end",
+    value: function end() {
+      this.ctx.fillText("You'd better play something else", 300, 300);
+    }
+  }]);
+
+  return Game;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Game);
+
+/***/ }),
+
+/***/ "./src/generatePlatforms.js":
+/*!**********************************!*\
+  !*** ./src/generatePlatforms.js ***!
+  \**********************************/
+/*! exports provided: level1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "level1", function() { return level1; });
+/* harmony import */ var _platform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./platform */ "./src/platform.js");
+
+var level1 = function level1(ctx) {
+  var platforms = [];
+  var startXPos = 125;
+  var startYPos = 350 + 20 + 12;
+  var gap = 60;
+  var width1 = 50;
+  var height1 = 23;
+  var speed = 2.85;
+  var name1 = "platform1";
+  var name2 = "platform2";
+  var width2 = 50;
+  var height2 = 76;
+
+  for (var i = 0; i < 100; ++i) {
+    var platform1 = new _platform__WEBPACK_IMPORTED_MODULE_0__["default"](startXPos + gap * i, startYPos - height1, width1, height1, speed, name1, ctx);
+    platforms.push(platform1); // if (i > 3  ) {
+    //     const platform2 = new Platform(startXPos + gap * (i + 1),
+    //         startYPos - height2,
+    //         width2,
+    //         height2,
+    //         speed,
+    //         name2,
+    //         ctx);
+    //     platforms.push(platform2);
+    //     ++i;
+    // }
+  }
+
+  return platforms;
+};
+
+/***/ }),
+
 /***/ "./src/hero.js":
 /*!*********************!*\
   !*** ./src/hero.js ***!
@@ -167,54 +292,81 @@ function () {
     this.x = x;
     this.y = y;
     this.ctx = ctx;
+    this.onGround = false;
     this.width = 40;
     this.height = 40;
-    this.jumping = false;
     this.velocity_Y = 0;
-    this.velocity_X = 0; // this.sprites = [document.getElementById("turtle1"),
-    //     document.getElementById("turtle2"),
-    //     document.getElementById("turtle3")
-    // ];
-
+    this.velocity_X = 0;
+    this.ticks = 0;
+    this.spriteIndex = 0;
     this.sprites = [document.getElementById("hero1"), document.getElementById("hero2")];
     document.addEventListener('keydown', function (e) {
-      console.log(_this.y);
+      if (e.keyCode === 32 && _this.y > 335) {
+        if (_this.y >= 349) {
+          _this.velocity_Y = -8.7;
+        } else if (_this.y >= 347) {
+          _this.velocity_Y = -8.6;
+        } else if (_this.y >= 344) {
+          _this.velocity_Y = -8.5;
+        } else if (_this.y >= 341) {
+          _this.velocity_Y = -8.4;
+        } else if (_this.y >= 339) {
+          _this.velocity_Y = -8.3;
+        } else if (_this.y >= 337) {
+          _this.velocity_Y = -8.2;
+        } else {
+          _this.velocity_Y = -8.1;
+        }
+      } // console.log(this.y);
+      // console.log(this.velocity_Y);
 
-      if (e.keyCode === 32 && _this.y > 340) {
-        _this.velocity_Y = -8;
-      }
     });
-  } // hitBottom() {
-  //     return this.y > 330;
-  // }
-  // handleJump(e) {
-  //     if (e.keyCode === 32 ) {
-  //         this.velocity_Y = -8;
-  //     }
-  // } 
-
+  }
 
   _createClass(Hero, [{
+    key: "hitBottom",
+    value: function hitBottom(platform) {
+      this.onGround = this.x >= platform.x && this.x <= platform.x + platform.width && this.y + this.height / 2 >= platform.y + 10;
+
+      this._resetLocation(platform);
+
+      return this.onGround;
+    }
+  }, {
+    key: "_resetLocation",
+    value: function _resetLocation(platform) {
+      if (this.onGround) {
+        this.x = platform.x + platform.width / 2;
+      }
+    }
+  }, {
+    key: "detectCollision",
+    value: function detectCollision(platform) {
+      return this.x + this.width / 2 >= platform.x + 15 && //making sure that when hero is flying over the platform never collide 
+      this.x - this.width / 2 < platform.x && this.y + this.height / 2 > platform.y + 12;
+    }
+  }, {
     key: "update",
     value: function update() {
-      // console.log(this.y); 
-      debugger;
-      this.x += this.velocity_X;
-      this.y += this.velocity_Y; // if (this.y <= 320) {
+      this.ticks++;
 
-      this.velocity_Y += 0.4; // down gravity
-      // }
-
-      if (this.y >= 350) {
-        this.velocity_Y = -6;
+      if (this.ticks % 10.5 === 0) {
+        this.spriteIndex = (this.spriteIndex + 1) % this.sprites.length;
       }
+
+      this.x += this.velocity_X;
+      this.y += this.velocity_Y;
+      this.velocity_Y += 0.6; // down gravity
+      // if (this.y >= 350) { //bounce
+      //     this.velocity_Y = -6;
+      // }
     }
   }, {
     key: "render",
     value: function render() {
       var renderX = this.x - this.width / 2;
       var renderY = this.y - this.height / 2;
-      this.ctx.drawImage(this.sprites[1], renderX, renderY);
+      this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY);
     }
   }]);
 
@@ -236,6 +388,10 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./environment */ "./src/environment.js");
 /* harmony import */ var _hero__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hero */ "./src/hero.js");
+/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./game */ "./src/game.js");
+/* harmony import */ var _generatePlatforms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./generatePlatforms */ "./src/generatePlatforms.js");
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -243,23 +399,80 @@ document.addEventListener("DOMContentLoaded", function () {
   var ctx = canvas.getContext('2d');
   var environment = new _environment__WEBPACK_IMPORTED_MODULE_0__["default"](canvas, ctx);
   var hero = new _hero__WEBPACK_IMPORTED_MODULE_1__["default"](150, 350, ctx);
-  ctx.fillStyle = 'white';
+  var platformL1 = Object(_generatePlatforms__WEBPACK_IMPORTED_MODULE_3__["level1"])(ctx);
+  var game = new _game__WEBPACK_IMPORTED_MODULE_2__["default"](ctx, environment, hero, platformL1);
+  game.render();
+  ctx.font = "30px Arial";
+  ctx.fillText("Click to Start ", 200, 200); // document.addEventListener('click', () => {
+  // gameLoop();
 
-  var gameLoop = function gameLoop() {
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    environment.update();
-    environment.render();
-    hero.update();
-    hero.render();
-    window.requestAnimationFrame(gameLoop);
-  };
-
-  gameLoop(); // ctx.fillStyle = 'black';
-  // ctx.beginPath();
-  // ctx.arc(250, 400, 10, 0, 2 * Math.PI);
-  // ctx.closePath();
-  // ctx.fill();
+  game.start(); // });
 });
+
+/***/ }),
+
+/***/ "./src/platform.js":
+/*!*************************!*\
+  !*** ./src/platform.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Platform =
+/*#__PURE__*/
+function () {
+  function Platform(x, y, width, height, speed, name, ctx) {
+    _classCallCheck(this, Platform);
+
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.ctx = ctx;
+    this.speed = speed;
+    this.name = name;
+    this.platform = document.getElementById(name);
+  }
+
+  _createClass(Platform, [{
+    key: "setBounce",
+    value: function setBounce(hero) {
+      if (this.name === 'platform1') {
+        hero.velocity_Y = -6;
+      } else if (this.name === 'platform2') {
+        if (this.x + this.width / 2 < hero.x) {
+          hero.velocity_Y = -3.2;
+        } else if (this.x + this.width / 2 >= hero.x) {
+          hero.velocity_Y = -3.4;
+        }
+      }
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.x -= this.speed;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      this.ctx.save();
+      this.ctx.drawImage(this.platform, this.x, this.y);
+      this.ctx.restore();
+    }
+  }]);
+
+  return Platform;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Platform);
 
 /***/ })
 

@@ -1,27 +1,25 @@
 import Environment from './environment';
 import Hero from './hero';
+import Game from './game';
+import { level1 } from './generatePlatforms';
 
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    
 
     const environment = new Environment(canvas, ctx);
     const hero = new Hero(150, 350, ctx);
-    ctx.fillStyle = 'white';
-    const gameLoop = () => {
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        environment.update();
-        environment.render();
-        hero.update();
-        hero.render();
-        window.requestAnimationFrame(gameLoop);
-    };
-    gameLoop();
+    const platformL1 = level1(ctx);
+    const game = new Game(ctx, environment, hero, platformL1);
 
-    // ctx.fillStyle = 'black';
-    // ctx.beginPath();
-    // ctx.arc(250, 400, 10, 0, 2 * Math.PI);
-    // ctx.closePath();
-    // ctx.fill();
+    game.render();
+
+    
+    ctx.font = "30px Arial";
+    ctx.fillText("Click to Start ", 200, 200);
+
+    // document.addEventListener('click', () => {
+        // gameLoop();
+        game.start();
+    // });
 });

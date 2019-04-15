@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Give It Up!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="../application.css">
     <!-- <script src="./javascript/index.js"></script> -->
     <style>
@@ -21,16 +23,25 @@
         #canvas {
             
         }
+        .title {
+            font-size: 120px;
+            font-family: 'Indie Flower', cursive;
+            font-weight: 1000;
+            position: absolute;
+            top: 0px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <a class='title'>Give It Up!</a>
     <canvas width="900" height="500" id="canvas"></canvas>
     <img src="../images/Cave_Stage_Background.png" id='bgImg'>
     <img src="../images/hero1.png" id='hero1'>
     <img src="../images/hero2.png" id='hero2'>
-    <img src="../images/turtle1.png" id="turtle1">
-    <img src="../images/turtle2.png" id="turtle2">
-    <img src="../images/turtle3.png" id="turtle3">
+    <img src="../images/platform1.png" id='platform1'>
+    <img src="../images/platform2.png" id='platform2'>
+
     <script type="text/javascript" src="../bundle.js"></script>
     <script>
         
