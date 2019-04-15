@@ -3,6 +3,7 @@ class Hero {
         this.x = x;
         this.y = y;
         this.ctx = ctx;
+        this.onGround = false;
         this.width = 40;
         this.height = 40;
         this.velocity_Y = 0;
@@ -19,14 +20,14 @@ class Hero {
                     this.velocity_Y = -8.7;
                 } else if (this.y >= 347) {
                     this.velocity_Y = -8.6;
-                // } else if (this.y >= 344) {
-                //     this.velocity_Y = -8.5;
-                // } else if (this.y >= 341){
-                //     this.velocity_Y = -8.4;
-                // } else if (this.y >= 339) {
-                //     this.velocity_Y = -8.3;
-                // } else if (this.y >= 337) {
-                //     this.velocity_Y = -8.2;
+                } else if (this.y >= 344) {
+                    this.velocity_Y = -8.5;
+                } else if (this.y >= 341){
+                    this.velocity_Y = -8.4;
+                } else if (this.y >= 339) {
+                    this.velocity_Y = -8.3;
+                } else if (this.y >= 337) {
+                    this.velocity_Y = -8.2;
                 } else {
                     this.velocity_Y = -8.1;
                 }
@@ -37,9 +38,17 @@ class Hero {
     }
 
     hitBottom(platform) {
-        return this.x >= platform.x 
+        this.onGround = this.x >= platform.x
             && (this.x <= platform.x + platform.width)
             && ((this.y + this.height / 2) >= (platform.y + 10));
+        this._resetLocation(platform);
+        return this.onGround;
+    }
+
+    _resetLocation(platform) {
+        if(this.onGround) {
+            this.x = platform.x + platform.width/2;
+        }
     }
 
     detectCollision(platform) {
@@ -68,7 +77,7 @@ class Hero {
         let renderX = this.x - this.width / 2;
         let renderY = this.y - this.height / 2;
         this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY);
-    }
+    } 
 
     
 }

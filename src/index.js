@@ -1,6 +1,6 @@
 import Environment from './environment';
 import Hero from './hero';
-import Platform from './platform';
+import Game from './game';
 import { level1 } from './generatePlatforms';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,26 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const environment = new Environment(canvas, ctx);
     const hero = new Hero(150, 350, ctx);
     const platformL1 = level1(ctx);
+    const game = new Game(ctx, environment, hero, platformL1);
 
-    ctx.fillStyle = 'white';
+    game.render();
 
-    const gameLoop = () => {
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        environment.update();
-        environment.render();
-        platformL1.forEach(platform => {
-            if (hero.hitBottom(platform)) {
-                platform.setBounce(hero);
-            } else if (hero.detectCollision(platform)) {
-                // window.alert("you died");
-                console.log("you died");
-            }
-            platform.update();
-            platform.render();
-        });
-        hero.update();
-        hero.render();
-        window.requestAnimationFrame(gameLoop);
-    };
-    gameLoop();
+    
+    ctx.font = "30px Arial";
+    ctx.fillText("Click to Start ", 200, 200);
+
+    // document.addEventListener('click', () => {
+        // gameLoop();
+        game.start();
+    // });
 });
