@@ -2,7 +2,7 @@ import Platform from "./platform";
 
 export const level1 = (ctx) => {
     const platforms = [];
-    const startXPos = 125;
+    const startXPos = 350;
     const startYPos = 350 + 20 + 12;
     const gap = 60;
     const width1 = 50;
@@ -21,17 +21,17 @@ export const level1 = (ctx) => {
             name1,
             ctx);
         platforms.push(platform1);
-        // if (i > 3  ) {
-        //     const platform2 = new Platform(startXPos + gap * (i + 1),
-        //         startYPos - height2,
-        //         width2,
-        //         height2,
-        //         speed,
-        //         name2,
-        //         ctx);
-        //     platforms.push(platform2);
-        //     ++i;
-        // }
+        if (i > 3  ) {
+            const platform2 = new Platform(startXPos + gap * (i + 1),
+                startYPos - height2,
+                width2,
+                height2,
+                speed,
+                name2,
+                ctx);
+            platforms.push(platform2);
+            ++i;
+        }
     }
     return platforms;
 };

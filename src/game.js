@@ -7,6 +7,7 @@ class Game {
         this.hero = hero;
         this.platforms = platforms;
         this.count = 0;
+        this.audio = document.getElementById('bkg');
     }
 
     render() {
@@ -20,7 +21,7 @@ class Game {
     }
     
     start() {
-        let score;
+        // this.audio.play();
         this.environment.update();
         this.environment.render();
         this.platforms.forEach(platform => {
@@ -28,10 +29,10 @@ class Game {
                 this.count += 1;
                 platform.setBounce(this.hero);
             } else if (this.hero.detectCollision(platform)) {
-                // window.alert("you died");
+                window.alert("you died");    
                 // console.log("you died");
                 this.end();
-                // document.location.reload();
+                document.location.reload();
             }
             platform.update();
             platform.render();
@@ -44,6 +45,7 @@ class Game {
 
     end() {
         this.ctx.fillText("You'd better play something else", 300, 300);
+        // pause();
     }
 }
 

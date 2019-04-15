@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvas.getContext('2d');
 
     const environment = new Environment(canvas, ctx);
-    const hero = new Hero(150, 350, ctx);
+    const hero = new Hero(375, 350, ctx);
     const platformL1 = level1(ctx);
     const game = new Game(ctx, environment, hero, platformL1);
 

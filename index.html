@@ -8,14 +8,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="../application.css">
-    <!-- <script src="./javascript/index.js"></script> -->
     <style>
         img {
             display: none;
         }
         body {
-            background-image: url("../images/page_bkg.jpg");
-            /* background: rgb(30, 30, 41); */
+            /* background-image: url("../images/page_bkg.jpg"); */
+            background: #ddd;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,15 +33,16 @@
     </style>
 </head>
 <body>
+    <audio id='bkg' src="./audios/give-it-up-bgm.mp3" loop></audio>
     <a class='title'>Give It Up!</a>
     <canvas width="900" height="500" id="canvas"></canvas>
-    <img src="../images/Cave_Stage_Background.png" id='bgImg'>
-    <img src="../images/hero1.png" id='hero1'>
-    <img src="../images/hero2.png" id='hero2'>
-    <img src="../images/platform1.png" id='platform1'>
-    <img src="../images/platform2.png" id='platform2'>
+    <img src="./images/Cave_Stage_Background.png" id='bgImg'>
+    <img src="./images/hero1.png" id='hero1'>
+    <img src="./images/hero2.png" id='hero2'>
+    <img src="./images/platform1.png" id='platform1'>
+    <img src="./images/platform2.png" id='platform2'>
 
-    <script type="text/javascript" src="../bundle.js"></script>
+    <script type="text/javascript" src="./bundle.js"></script>
     <script>
         
     </script>
