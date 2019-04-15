@@ -199,6 +199,8 @@ function () {
             // console.log("you died");
             _this.end(); // document.location.reload();
 
+          } else if (_this.hero.y > 500) {
+            _this.win();
           }
 
           platform.update();
@@ -224,7 +226,24 @@ function () {
       this.ctx.fillText("Press any key to restart!", 200, 150);
       this.ctx.fillStyle = 'red';
       this.ctx.font = '70px Dokdo';
-      this.ctx.fillText(Math.floor(this.count / this.platforms.length * 100) + '%', 20, 50);
+      this.ctx.fillText(Math.ceil(this.count / this.platforms.length * 100) + '%', 20, 50);
+      this.gameStarted = false;
+      this.audio.pause();
+      document.addEventListener('keydown', this.restart.bind(this));
+    }
+  }, {
+    key: "win",
+    value: function win() {
+      this.ctx.fillStyle = 'black';
+      this.ctx.font = "30px Dokdo";
+      this.ctx.fillText("You win!", 200, 100);
+      this.ctx.fillStyle = 'red';
+      this.ctx.fillText("But the hero dead!", 200, 150);
+      this.ctx.fillStyle = 'black';
+      this.ctx.fillText("Press any key to restart!", 200, 200);
+      this.ctx.fillStyle = 'green';
+      this.ctx.font = '70px Dokdo';
+      this.ctx.fillText(Math.ceil(this.count / this.platforms.length * 100) + '%', 20, 50);
       this.gameStarted = false;
       this.audio.pause();
       document.addEventListener('keydown', this.restart.bind(this));
@@ -270,11 +289,11 @@ var level1 = function level1(ctx) {
   var width2 = 50;
   var height2 = 76;
 
-  for (var i = 0; i < 50; ++i) {
+  for (var i = 0; i < 100; ++i) {
     var platform1 = new _platform__WEBPACK_IMPORTED_MODULE_0__["default"](startXPos + gap * i, startYPos - height1, width1, height1, speed, name1, ctx);
     platforms.push(platform1);
 
-    if (i > 3 && i % 4 == 0) {
+    if (i > 3 && i % 6 == 0) {
       var platform2 = new _platform__WEBPACK_IMPORTED_MODULE_0__["default"](startXPos + gap * (i + 1), startYPos - height2, width2, height2, speed, name2, ctx);
       platforms.push(platform2);
       ++i;

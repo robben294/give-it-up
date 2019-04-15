@@ -12,7 +12,7 @@ export const level1 = (ctx) => {
     const name2 = "platform2";
     const width2 = 50;
     const height2 = 76;
-    for (let i = 0; i < 50; ++i) {
+    for (let i = 0; i < 100; ++i) {
         const platform1 = new Platform(startXPos + gap * i, 
             startYPos - height1,   
             width1, 
@@ -21,7 +21,7 @@ export const level1 = (ctx) => {
             name1,
             ctx);
         platforms.push(platform1);
-        if (i > 3 && i % 4 == 0 ) {
+        if (i > 3 && i % 6 == 0 ) {
             const platform2 = new Platform(startXPos + gap * (i + 1),
                 startYPos - height2,
                 width2,

@@ -34,6 +34,8 @@ class Game {
                     // console.log("you died");
                     this.end();
                     // document.location.reload();
+                } else if (this.hero.y > 500) {
+                    this.win();
                 }
                 platform.update();
                 platform.render();
@@ -56,7 +58,23 @@ class Game {
         this.ctx.fillText("Press any key to restart!", 200, 150);
         this.ctx.fillStyle = 'red';
         this.ctx.font = '70px Dokdo';
-        this.ctx.fillText(Math.floor((this.count / this.platforms.length) * 100) + '%', 20, 50);
+        this.ctx.fillText(Math.ceil((this.count / this.platforms.length) * 100) + '%', 20, 50);
+        this.gameStarted = false;
+        this.audio.pause();
+        document.addEventListener('keydown', this.restart.bind(this));
+    }
+    
+    win() {
+        this.ctx.fillStyle = 'black';
+        this.ctx.font = "30px Dokdo";
+        this.ctx.fillText("You win!", 200, 100);
+        this.ctx.fillStyle = 'red';
+        this.ctx.fillText("But the hero dead!", 200, 150);
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillText("Press any key to restart!", 200, 200);
+        this.ctx.fillStyle = 'green';
+        this.ctx.font = '70px Dokdo';
+        this.ctx.fillText(Math.ceil((this.count / this.platforms.length) * 100) + '%', 20, 50);
         this.gameStarted = false;
         this.audio.pause();
         document.addEventListener('keydown', this.restart.bind(this));
