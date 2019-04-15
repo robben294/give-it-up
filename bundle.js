@@ -188,32 +188,53 @@ function () {
       var _this = this;
 
       // this.audio.play();
-      this.environment.update();
-      this.environment.render();
-      this.platforms.forEach(function (platform) {
-        if (_this.hero.hitBottom(platform)) {
-          _this.count += 1;
-          platform.setBounce(_this.hero);
-        } else if (_this.hero.detectCollision(platform)) {
-          // window.alert("you died");    
-          // console.log("you died");
-          _this.end();
+      if (this.gameStarted) {
+        this.environment.render();
+        this.platforms.forEach(function (platform) {
+          if (_this.hero.hitBottom(platform)) {
+            _this.count += 1;
+            platform.setBounce(_this.hero);
+          } else if (_this.hero.detectCollision(platform)) {
+            // window.alert("you died");    
+            // console.log("you died");
+            _this.end(); // document.location.reload();
 
-          document.location.reload();
-        }
+          }
 
-        platform.update();
-        platform.render();
-      });
-      this.ctx.fillText(Math.floor(this.count / this.platforms.length * 100) + '%', 20, 50);
-      this.hero.update();
-      this.hero.render();
+          platform.update();
+          platform.render();
+        });
+        this.ctx.fillText(Math.floor(this.count / this.platforms.length * 100) + '%', 20, 50);
+        this.hero.update();
+        this.hero.render();
+        this.environment.update();
+      }
+
       window.requestAnimationFrame(this.gameLoop.bind(this));
     }
   }, {
     key: "end",
     value: function end() {
-      this.ctx.fillText("You'd better play something else", 300, 300); // pause();
+      // this.ctx.clearRect(0, 0, 900, 500);
+      // this.ctx.fillStyle = 'grey';
+      // this.ctx.fillRect(0 ,0 , 900, 500);
+      this.ctx.fillStyle = 'white';
+      this.ctx.font = "30px Dokdo";
+      this.ctx.fillText("You'd better play something else", 200, 100);
+      this.ctx.fillText("Press any key to restart", 200, 150);
+      this.ctx.fillStyle = 'red';
+      this.ctx.font = '70px Dokdo';
+      this.ctx.fillText(Math.floor(this.count / this.platforms.length * 100) + '%', 20, 50);
+      this.gameStarted = false;
+      this.audio.pause();
+      document.addEventListener('keydown', this.restart.bind(this));
+    }
+  }, {
+    key: "restart",
+    value: function restart() {
+      document.location.reload();
+      this.audio.play();
+      document.removeEventListener('keydown', this.restart.bind(this));
     }
   }]);
 
@@ -249,7 +270,7 @@ var level1 = function level1(ctx) {
   var width2 = 50;
   var height2 = 76;
 
-  for (var i = 0; i < 1000; ++i) {
+  for (var i = 0; i < 50; ++i) {
     var platform1 = new _platform__WEBPACK_IMPORTED_MODULE_0__["default"](startXPos + gap * i, startYPos - height1, width1, height1, speed, name1, ctx);
     platforms.push(platform1);
 
@@ -415,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   document.addEventListener('keydown', startGame);
-  ctx.font = "50px Indie Flower"; // ctx.fillText("Click to Start ", 200, 200);
+  ctx.font = "50px Dokdo"; // ctx.fillText("Click to Start ", 200, 200);
 });
 
 /***/ }),

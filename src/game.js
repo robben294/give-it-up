@@ -23,30 +23,50 @@ class Game {
     
     gameLoop() {
         // this.audio.play();
-        this.environment.update();
-        this.environment.render();
-        this.platforms.forEach(platform => {
-            if (this.hero.hitBottom(platform)) {
-                this.count += 1;
-                platform.setBounce(this.hero);
-            } else if (this.hero.detectCollision(platform)) {
-                // window.alert("you died");    
-                // console.log("you died");
-                this.end();
-                document.location.reload();
-            }
-            platform.update();
-            platform.render();
-        });
-        this.ctx.fillText(Math.floor((this.count / this.platforms.length) * 100) + '%', 20, 50);
-        this.hero.update();
-        this.hero.render();
+        if (this.gameStarted) {
+            this.environment.render();
+            this.platforms.forEach(platform => {
+                if (this.hero.hitBottom(platform)) {
+                    this.count += 1;
+                    platform.setBounce(this.hero);
+                } else if (this.hero.detectCollision(platform)) {
+                    // window.alert("you died");    
+                    // console.log("you died");
+                    this.end();
+                    // document.location.reload();
+                }
+                platform.update();
+                platform.render();
+            });
+            this.ctx.fillText(Math.floor((this.count / this.platforms.length) * 100) + '%', 20, 50);
+            this.hero.update();
+            this.hero.render();
+            this.environment.update();
+        }
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 
     end() {
-        this.ctx.fillText("You'd better play something else", 300, 300);
-        // pause();
+        // this.ctx.clearRect(0, 0, 900, 500);
+        // this.ctx.fillStyle = 'grey';
+        // this.ctx.fillRect(0 ,0 , 900, 500);
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = "30px Dokdo";
+        this.ctx.fillText("You'd better play something else", 200, 100);
+        this.ctx.fillText("Press any key to restart", 200, 150);
+        this.ctx.fillStyle = 'red';
+        this.ctx.font = '70px Dokdo';
+        this.ctx.fillText(Math.floor((this.count / this.platforms.length) * 100) + '%', 20, 50);
+        this.gameStarted = false;
+        this.audio.pause();
+        document.addEventListener('keydown', this.restart.bind(this));
+    }
+    
+    restart() {
+
+        document.location.reload();
+        this.audio.play();
+        document.removeEventListener('keydown', this.restart.bind(this));
     }
 }
 

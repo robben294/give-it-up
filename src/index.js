@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     
     document.addEventListener('keydown', startGame);
-    ctx.font = "50px Indie Flower";
+    ctx.font = "50px Dokdo";
     // ctx.fillText("Click to Start ", 200, 200);
     
 });

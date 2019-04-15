@@ -12,7 +12,7 @@ export const level1 = (ctx) => {
     const name2 = "platform2";
     const width2 = 50;
     const height2 = 76;
-    for (let i = 0; i < 1000; ++i) {
+    for (let i = 0; i < 50; ++i) {
         const platform1 = new Platform(startXPos + gap * i, 
             startYPos - height1,   
             width1, 

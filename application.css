@@ -3,11 +3,11 @@ img {
 }
 body {
     /* background-image: url("../images/page_bkg.jpg"); */
-    background: #ddd;
+    background: rgb(40, 40, 40);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Indie Flower', cursive;
+    font-family: 'Dokdo', cursive;
 }
 #canvas {
 
@@ -24,13 +24,14 @@ body {
     left: 25%; 
     top: 25%;
     font-size: 50px;
-    color: #ddd;
-    background: rgb(0,0,0,0.3);
+    color: black;
+    /* background: rgb(0,0,0,0.3); */
 }
 .title {
     font-size: 120px;
-    font-family: 'Indie Flower', cursive;
+    font-family: 'Freckle Face', cursive;
     font-weight: 1000;
+    color: #ddd;
     position: absolute;
     top: 0px;
     text-align: center;
@@ -38,4 +39,17 @@ body {
 
 .hidden {
     display: none;
+}
+
+.social-link {
+    display: flex;
+    position: absolute;
+    /* top: 700px;
+    left: 400px; */
+    justify-content: space-between;
+}
+
+i {
+    color: white;
+    margin: 10px;
 }
