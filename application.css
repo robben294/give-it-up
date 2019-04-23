@@ -6,6 +6,7 @@ body {
     background: rgb(40, 40, 40);
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     font-family: 'Dokdo', cursive;
 }
@@ -47,6 +48,12 @@ body {
     /* top: 700px;
     left: 400px; */
     justify-content: space-between;
+    bottom: 100px;
+}
+
+.instruction {
+    font-size: 30px;
+    color: white;
 }
 
 i {
