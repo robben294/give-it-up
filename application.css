@@ -16,6 +16,8 @@ body {
 
 .canvas-container {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 #start-menus {
@@ -47,8 +49,17 @@ body {
     position: absolute;
     /* top: 700px;
     left: 400px; */
-    justify-content: space-between;
+    justify-content: space-around;
     bottom: 20px;
+}
+
+.social-link i {
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+.social-link i:hover {
+    color: rgb(84, 66, 128);
 }
 
 .instruction {
