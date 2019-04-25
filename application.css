@@ -48,11 +48,12 @@ body {
     /* top: 700px;
     left: 400px; */
     justify-content: space-between;
-    bottom: 100px;
+    bottom: 20px;
 }
 
 .instruction {
     font-size: 30px;
+    margin-top: 10px;
     color: white;
 }
 
