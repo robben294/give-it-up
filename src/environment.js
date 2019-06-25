@@ -15,7 +15,7 @@ class Environment {
         if (this.bgPos < -this.bgWidth) {
             this.bgPos = 0;
         }
-    }
+    }  
 
     render() {
         for (let i = 0; i <= this.canvas.width/this.bgWidth + 1; i++) {
